@@ -6,7 +6,9 @@
   "scripts": {
     "preinstall": "git submodule update --init --recursive --force",
     "start": "nw",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "submodules-update": "npm install file:submodules/node-px2dt-localdata-access file:submodules/px2style; gulp;",
+    "build": "node ./build.js"
   },
   "repository": {
     "type": "git",
