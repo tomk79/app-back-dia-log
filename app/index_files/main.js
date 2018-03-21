@@ -10,12 +10,16 @@ new (function(window){
 	// NW.js
 	this.nw = nw;
 	this.nwWindow = nw.Window.get();
-	this.nwWindow.moveTo(0, 0);
-	this.nwWindow.resizeTo(window.parent.screen.width, window.parent.screen.height);
+	// this.nwWindow.moveTo(0, 0);
+	// this.nwWindow.resizeTo(window.parent.screen.width, window.parent.screen.height);
 
 	// jQuery
-    var $ = require('jquery');
-    this.$ = $;
+	var $ = require('jquery');
+	this.$ = $;
+
+	// templates manager
+	var TemplatesManager = require('./index_files/templates.js');
+	this.tplMgr = new TemplatesManager(this);
 
 	// package.json
 	var _packageJson = require('../package.json');
@@ -66,7 +70,7 @@ new (function(window){
 				function(it1, data){
 					// データディレクトリを初期化
 					_this.px2dtLDA.initDataDir(function(result){
-                        if( !result ){
+						if( !result ){
 							console.error('FAILED to Initialize data directory. - '+_path_data_dir);
 						}
 						_this.px2dtLDA.save(function(){
@@ -159,7 +163,7 @@ new (function(window){
 	 */
 	$(window).on('load', function(){
 
-        _it79.fnc({}, [
+		_it79.fnc({}, [
 			function(it, arg){
 				// init
 				init(function(){
