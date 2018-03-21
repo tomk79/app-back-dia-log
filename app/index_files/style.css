@@ -8,7 +8,17 @@ body {
   -webkit-user-select: none;
   /* Safari、Chromeなど */
   -ms-user-select: none;
-  /* IE10かららしい */ }
+  /* IE10かららしい */
+  text-align: left;
+  color: #333333;
+  font-size-adjust: none;
+  -webkit-text-size-adjust: 100%;
+  /* Mobile Safari : 文字サイズの自動調整をオフに */ }
+
+body, input, textarea, select, option, button {
+  font-family: "ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","Meiryo","メイリオ", sans-serif;
+  font-size: medium;
+  line-height: 1.7; }
 
 * {
   outline: none; }
