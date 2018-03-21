@@ -1,0 +1,71 @@
+{
+  "name": "back-dia-log",
+  "version": "0.0.1-alpha.1",
+  "description": "",
+  "main": "app/index.html",
+  "scripts": {
+    "preinstall": "git submodule update --init --recursive --force",
+    "start": "nw",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomk79/app-back-dia-log.git"
+  },
+  "author": "Tomoya Koyanagi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tomk79/app-back-dia-log/issues"
+  },
+  "homepage": "https://github.com/tomk79/app-back-dia-log#readme",
+  "dependencies": {
+    "fs-extra": "^5.0.0",
+    "iterate79": "^1.1.1",
+    "jquery": "^3.3.1",
+    "phpjs": "^1.3.2",
+    "px2dt-localdata-access": "file:submodules/node-px2dt-localdata-access",
+    "px2style": "file:submodules/px2style",
+    "utils79": "0.0.4",
+    "zip-folder": "^1.0.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-browserify": "^0.5.1",
+    "gulp-plumber": "^1.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "nw": "^0.29.1-sdk",
+    "nw-builder": "^3.5.1"
+  },
+  "pickles2": {
+    "dataDirName": ".backdialog",
+    "credit": "(C)Tomoya Koyanagi."
+  },
+  "window": {
+    "title": "Backdialog",
+    "toolbar": true,
+    "frame": true,
+    "width": 1024,
+    "height": 520,
+    "fullscreen": false,
+    "icon": "app/common/images/appicon.png",
+    "position": "center"
+  },
+  "platformOverrides": {
+    "win": {
+      "window": {
+        "toolbar": false
+      }
+    },
+    "osx": {
+      "window": {
+        "toolbar": false
+      }
+    },
+    "linux": {
+      "window": {
+        "toolbar": false
+      }
+    }
+  }
+}
