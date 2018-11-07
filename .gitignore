@@ -1,6 +1,6 @@
 package-lock.json
 /cache/
-/build/
+/build/dist/
 
 # Logs
 logs

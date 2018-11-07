@@ -8,7 +8,7 @@
     "start": "nw",
     "test": "echo \"Error: no test specified\" && exit 1",
     "submodules-update": "npm install file:submodules/node-px2dt-localdata-access file:submodules/px2style; gulp;",
-    "build": "node ./build.js"
+    "build": "node ./build/build.js"
   },
   "repository": {
     "type": "git",
