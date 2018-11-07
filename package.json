@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/tomk79/app-back-dia-log#readme",
   "dependencies": {
+    "backlog-api": "^1.0.2",
     "fs-extra": "^5.0.0",
     "iterate79": "^1.1.1",
     "jquery": "^3.3.1",

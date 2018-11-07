@@ -17,10 +17,6 @@ new (function(window){
 	var $ = require('jquery');
 	this.$ = $;
 
-	// templates manager
-	var TemplatesManager = require('./index_files/templates.js');
-	this.tplMgr = new TemplatesManager(this);
-
 	// package.json
 	var _packageJson = require('../package.json');
 	this.packageJson = _packageJson;
@@ -60,6 +56,14 @@ new (function(window){
 	var _nw_gui = require('nw.gui');
 	var _appName = _packageJson.window.title;
 	window.document.title = _appName;
+
+	// templates manager
+	var TemplatesManager = require('./index_files/templates.js');
+	this.tplMgr = new TemplatesManager(this);
+
+	// Application data I/O
+	var AppDataIo = require('./index_files/appDataIo.js');
+	this.appDataIo = new AppDataIo(this);
 
 	/**
 	 * アプリケーションの初期化
