@@ -15,6 +15,12 @@ var platforms = [
 	'win32',
 	'linux64'
 ];
+var APPLE_IDENTITY = null;
+if( utils79.is_file( './apple_identity.txt' ) ){
+	APPLE_IDENTITY = fs.readFileSync('./apple_identity.txt').toString();
+	APPLE_IDENTITY = utils79.trim(APPLE_IDENTITY);
+}
+
 function pad(str, len){
 	str += '';
 	str = phpjs.str_pad(str, len, '0', 'STR_PAD_LEFT');
@@ -120,12 +126,35 @@ nw.build().then(function () {
 	(function(){
 		it79.fnc({}, [
 			function(itPj, param){
+				// macOS 版に 署名を追加する
+				if( !APPLE_IDENTITY ){
+					itPj.next(param);
+					return;
+				}
+				writeLog('-- Apple Developer Certification:');
+				writeLog(APPLE_IDENTITY);
+				var proc = require('child_process').spawn(
+					'codesign',
+					[
+						'--deep',
+						'-s', APPLE_IDENTITY,
+						'./build/'+appName+'/osx64/'+appName+'.app'
+					],
+					{}
+				);
+				proc.on('close', function(){
+					writeLog('done!');
+					itPj.next(param);
+				});
+			},
+			function(itPj, param){
+				// ZIP Apps.
 				it79.ary(
 					platforms,
 					function(it2, platformName, idx){
 						writeLog('[platform: '+platformName+'] Zipping...');
 						zipFolder(
-							__dirname + '/dist/'+appName+'/'+platformName+'/',
+							__dirname + '/'+appName+'/'+platformName+'/',
 							__dirname + '/dist/'+appName+'-'+versionSign+'-'+platformName+'.zip',
 							function(err) {
 								if(err) {
@@ -144,7 +173,7 @@ nw.build().then(function () {
 			},
 			function(itPj, param){
 				writeLog('cleanup...');
-				fsX.removeSync(__dirname+'/dist/'+appName+'/');
+				fsX.removeSync(__dirname+'/'+appName+'/');
 				itPj.next(param);
 			},
 			function(itPj, param){

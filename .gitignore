@@ -1,6 +1,7 @@
 package-lock.json
 /cache/
 /build/dist/
+apple_identity.txt
 
 # Logs
 logs
