@@ -1,6 +1,7 @@
 new (function(window){
 	// pickles
 	var _this = this;
+	window.main = this;
 	this.px2style = window.px2style;
 
 	// node.js
@@ -47,6 +48,17 @@ new (function(window){
 	);
 	this.px2dtLDA = _px2dtLDA;
 
+	var _platform = (function(){
+		var platform = 'unknown';
+		console.log('process.platform:', process.platform);
+		if(process.platform == 'win32'){return 'win';}
+		if(process.platform == 'darwin'){return 'mac';}
+		if(process.platform == 'linux'){return 'linux';}
+		console.log('unknown platform:', process.platform);
+		return platform;
+	})();
+	console.log('platform: '+_platform);
+
 	var _php = require('phpjs');
 	this.php = _php;
 
@@ -83,7 +95,11 @@ new (function(window){
 					});
 				},
 				function(it1, data){
-
+					px2style.header.init()
+					it1.next();
+					return;
+				},
+				function(it1, data){
 					(function(){
 						// node-webkit の標準的なメニューを出す
 						var win = _nw_gui.Window.get();

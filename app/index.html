@@ -1,25 +1,79 @@
 <!DOCTYPE html>
 <html>
-    <head>
+	<head>
 		<meta charset="UTF-8" />
-        <title>Backdialog</title>
+		<title>Backdialog</title>
 		<meta name="viewport" content="width=device-width" />
 		<meta name="keywords" content="" />
 		<meta name="description" content="" />
 
-		<!-- Bootstrap -->
+		<!-- Bootstrap 4 -->
 		<link rel="stylesheet" href="./common/bootstrap/css/bootstrap.min.css" />
-		<script src="./common/bootstrap/js/bootstrap.min.js"></script>
 
 		<!-- Pickles 2 Style -->
 		<link rel="stylesheet" href="./common/px2style/dist/styles.css" charset="utf-8" />
+
+		<!-- Local Resources -->
+		<link rel="stylesheet" href="index_files/style.css" />
+	</head>
+	<body>
+		<header class="px2-header">
+			<div class="px2-header__inner">
+				<div class="px2-header__px2logo">
+					<a href="javascript:px2style.header.init({'current':''});"><img src="common/images/appicon.png" alt="" /></a>
+				</div>
+				<div class="px2-header__block">
+					<div class="px2-header__id">
+						<span>Back DIA log</span>
+					</div>
+					<div class="px2-header__global-menu">
+						<ul>
+							<li><a href="javascript:px2style.header.init({'current':''});" data-name="">HOME</a></li>
+							<!-- <li><a href="javascript:px2style.header.init({'current':'sitemap'});" data-name="sitemap">Sitemap</a></li>
+							<li><a href="javascript:px2style.header.init({'current':'theme'});" data-name="theme">Theme</a></li>
+							<li><a href="javascript:px2style.header.init({'current':'contents'});" data-name="contents">Contents</a></li>
+							<li><a href="javascript:px2style.header.init({'current':'publish'});" data-name="publish">Publish</a></li> -->
+						</ul>
+					</div>
+				</div>
+				<div class="px2-header__shoulder-menu">
+					<button>≡</button>
+					<ul>
+						<!-- <li><a href="javascript:px2style.header.init({'current':'menu-a'});" data-name="menu-a">Menu A</a></li>
+						<li><a href="javascript:px2style.header.init({'current':'menu-b'});" data-name="menu-b">Menu B</a></li>
+						<li><a href="javascript:px2style.header.init({'current':'menu-c'});" data-name="menu-c">Menu C</a></li>
+						<li><a href="javascript:;">Group A</a>
+							<ul>
+								<li><a href="javascript:px2style.header.init({'current':'menu-a-a'});" data-name="menu-a-a">Menu A-A</a></li>
+								<li><a href="javascript:px2style.header.init({'current':'menu-a-b'});" data-name="menu-a-b">Menu A-B</a></li>
+								<li><a href="javascript:px2style.header.init({'current':'menu-a-c'});" data-name="menu-a-c">Menu A-C</a></li>
+							</ul>
+						</li>
+						<li><a href="javascript:;">Group B</a>
+							<ul>
+								<li><a href="javascript:px2style.header.init({'current':'menu-b-a'});" data-name="menu-b-a">Menu B-A</a></li>
+								<li><a href="javascript:px2style.header.init({'current':'menu-b-b'});" data-name="menu-b-b">Menu B-B</a></li>
+								<li><a href="javascript:px2style.header.init({'current':'menu-b-c'});" data-name="menu-b-c">Menu B-C</a></li>
+							</ul>
+						</li> -->
+						<li><a href="javascript:main.exit();" data-name="quit">Quit</a></li>
+					</ul>
+				</div>
+			</div>
+		</header>
+		<div class="container">
+			<h1>Back DIA log</h1>
+			<p>Paragraph</p>
+		</div>
+
+
+		<!-- Bootstrap 4 -->
+		<script src="./common/bootstrap/js/bootstrap.min.js"></script>
+
+		<!-- Pickles 2 Style -->
 		<script src="./common/px2style/dist/scripts.js" charset="utf-8"></script>
 
 		<!-- Local Resources -->
-        <link rel="stylesheet" href="index_files/style.css" />
-        <script src="index_files/main.js"></script>
-    </head>
-    <body>
-        <h1>Backdialog</h1>
-    </body>
+		<script src="index_files/main.js"></script>
+	</body>
 </html>
