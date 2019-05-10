@@ -9819,9 +9819,176 @@ return jQuery;
     var Px2style = function(){};
     var px2style = window.px2style = new Px2style;
     var modal = require('./modal/_modal.js')(Px2style);
+    var header = require('./header/_header.js')(Px2style);
 })();
 
-},{"./modal/_modal.js":3}],3:[function(require,module,exports){
+},{"./header/_header.js":3,"./modal/_modal.js":4}],3:[function(require,module,exports){
+/**
+ * header.js
+ */
+module.exports = function(Px2style){
+	var $ = require('jquery');
+	var $header,
+		$globalMenu,
+		$globalMenuUl,
+		$shoulderMenu,
+		$shoulderMenuUl;
+	var options = {};
+	var Header = function(){};
+
+	Px2style.prototype.header = new Header();
+	window.addEventListener('resize', function(){
+		if(!$header){return;}
+		window.px2style.header.init(options);
+	});
+	window.addEventListener('click', function(){
+		if(!$header){return;}
+		closeDropdownMenus();
+	});
+
+	Header.prototype.init = function(_options){
+		options = _options || {};
+		options.current = options.current || '';
+		$header = $('.px2-header__inner');
+		$globalMenu = $('.px2-header__global-menu');
+		$globalMenuUl = $globalMenu.find('>ul');
+		$shoulderMenu = $('.px2-header__shoulder-menu');
+		$shoulderMenuUl = $shoulderMenu.find('>ul');
+
+		$globalMenuUl.find('li').removeClass('px2-header__global-menu-group');
+		$globalMenuUl.find('li:has(>ul)').addClass('px2-header__global-menu-group')
+		$globalMenuUl.find('li:has(>ul) > a').off().on('click', function(e){
+			e.stopPropagation();
+			var $ul = $(this).parent().find('>ul');
+			if( $ul.is(':visible') ){
+				$ul.hide();
+				$(this).parent().removeClass('px2-header__global-menu-group-opened');
+			}else{
+				$ul.show();
+				$(this).parent().addClass('px2-header__global-menu-group-opened');
+			}
+		});
+
+		$shoulderMenu
+			.css({
+				'width': 50,
+				'height': $header.height()
+			})
+			.off()
+			.on('click', function(){
+				if( $shoulderMenuUl.css('display') == 'block' ){
+					$shoulderMenuUl.hide();
+					$shoulderMenu
+						.css({
+							'width':50 ,
+							'height':$header.height()
+						})
+					;
+				}
+			}
+		);
+		$shoulderMenu.find('button')
+			.off()
+			.on('click', function(e){
+				e.stopPropagation();
+				closeDropdownMenus();
+				if( $shoulderMenuUl.css('display') == 'block' ){
+					$shoulderMenuUl.hide();
+					$shoulderMenu
+						.css({
+							'width':50 ,
+							'height':$header.height()
+						})
+					;
+
+				}else{
+					$shoulderMenuUl.show().height( $(window).height()-$header.height() );
+					$shoulderMenu
+						.css({
+							'width':'100%' ,
+							'height':$(window).height()
+						})
+					;
+
+				}
+			})
+		;
+
+
+
+		$shoulderMenu.find('button')
+			.css({
+				'height': $header.height()
+			})
+		;
+		$shoulderMenuUl.css({
+			'top': $header.height() ,
+			'height': $(window).height()-$header.height()
+		});
+
+		$shoulderMenuUl.find('li').removeClass('px2-header__shoulder-menu-group');
+		$shoulderMenuUl.find('li:has(>ul)').addClass('px2-header__shoulder-menu-group')
+		$shoulderMenuUl.find('li:has(>ul) > a').off().on('click', function(e){
+			e.stopPropagation();
+			var $ul = $(this).parent().find('>ul');
+			if( $ul.is(':visible') ){
+				$ul.hide();
+				$(this).parent().removeClass('px2-header__shoulder-menu-group-opened');
+			}else{
+				$ul.show();
+				$(this).parent().addClass('px2-header__shoulder-menu-group-opened');
+			}
+		});
+
+		if( $shoulderMenuUl.is(':visible') ){
+			$shoulderMenu.css({
+				width: '100%' ,
+				height: $(window).height()
+			});
+		}else{
+			$shoulderMenu
+				.css({
+					'height': $header.outerHeight()
+				})
+			;
+		}
+
+		if( options.current === '' ){
+			$header.find('.px2-header__px2logo').css({
+				"min-width": 70,
+				"width": 70
+			});
+			$header.find('.px2-header__px2logo a').css({
+				"width": 70,
+				"height": 70
+			});
+		}else{
+			$header.find('.px2-header__px2logo').css({
+				"min-width": 45,
+				"width": 45
+			});
+			$header.find('.px2-header__px2logo a').css({
+				"width": 45,
+				"height": 45
+			});
+		}
+
+		$header.find('[data-name]').removeClass('current');
+		$header.find('[data-name="'+options.current+'"]').addClass('current');
+		$('.px2-header').css({"height":$header.outerHeight()});
+
+	}
+
+	/**
+	 * ドロップダウンメニューを全て閉じる
+	 */
+	function closeDropdownMenus(){
+		$globalMenuUl.find('li').removeClass('px2-header__global-menu-group-opened');
+		$globalMenuUl.find('ul').hide();
+	}
+}
+
+},{"jquery":1}],4:[function(require,module,exports){
 /**
  * modal.js
  */
@@ -9842,16 +10009,20 @@ module.exports = function(Px2style){
 			options.title = options.title||'';
 			options.body = options.body||$('<div>');
 			options.buttons = options.buttons||[
-				$('<button class="px2-btn px2-btn--primary">')
+				$('<button type="submit" class="px2-btn px2-btn--primary">')
 					.text('OK')
 					.on('click', function(e){
 						_this.closeModal();
 					})
 			];
 			options.target = options.target||$('body');
+			options.form = options.form||false;
 
 			var tpl = '';
 			tpl += '<div class="px2-modal">';
+			if(options.form){
+				tpl += '<form>';
+			}
 			tpl += ' <div class="px2-modal__dialog">';
 			tpl += '  <div class="px2-modal__header">';
 			tpl += '      <div class="px2-modal__title"></div>';
@@ -9859,9 +10030,21 @@ module.exports = function(Px2style){
 			tpl += '  <div class="px2-modal__body"><div class="px2-modal__body-inner"></div></div>';
 			tpl += '  <div class="px2-modal__footer"></div>';
 			tpl += ' </div>';
+			if(options.form){
+				tpl += '</form>';
+			}
 			tpl += '</div>';
 
 			$modal = $(tpl);
+
+			if(options.form){
+				$modal.find('form').attr({
+					'action': options.form.action || 'javascript:;',
+					'method': options.form.method || 'post'
+				}).on('submit', options.form.submit || function(){
+					_this.closeModal();
+				});
+			}
 
 			var $title = $modal.find('.px2-modal__title');
 			$title.append( options.title );
